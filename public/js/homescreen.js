@@ -1,0 +1,5 @@
+BillingSystem.HomeScreen = {
+    init     : function(){
+
+    },
+}

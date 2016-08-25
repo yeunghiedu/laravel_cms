@@ -10,23 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-if (App::environment() == \App\Modules\Core\Constant::SUB_DOMAIN_BILLING_SYSTEM)
+if (App::environment() == \App\Modules\Core\Constant::SUB_DOMAIN)
 {
-    $domain = \App\Modules\Core\Constant::SUB_DOMAIN_BILLING_SYSTEM.'.'.\App\Modules\Core\Constant::DOMAIN_NAME;
-    Route::group(['domain' => $domain, 'middleware' => ['web'],'namespace' => 'App\Modules\BillingSystem\Controllers'], function () {
+    $domain = \App\Modules\Core\Constant::SUB_DOMAIN.'.'.\App\Modules\Core\Constant::DOMAIN_NAME;
+    
+    Route::group(['domain' => $domain, 'middleware' => ['web'],'namespace' => 'App\Modules\FrontEnd\Controllers'], function () {
 
-        Route::get('/',['as'=>'BillingSystemHome.index','uses' => 'HomeController@index']);
+        Route::get('/',['as'=>'FrontEndHome.index','uses' => 'HomeController@index']);
 
-        //charge
-        Route::get('/charge',['as'=>'BillingSystemCharge.index','uses' => 'ChargeController@index']);
-        Route::get('/chargeCreate',['as'=>'BillingSystemCharge.create','uses' => 'ChargeController@create']);
-        Route::post('/chargeStore',['as'=>'BillingSystemCharge.store','uses' => 'ChargeController@store']);
-        Route::get('/loadChargelogTableByPerpage',['as'=>'BillingSystemAjax.loadChargelogTableByPerpage','uses' => 'AjaxController@loadChargelogTableByPerpage']);
-    });
-} else {
-    Route::get('/', function () {
-        return view('welcome');
     });
 }
 

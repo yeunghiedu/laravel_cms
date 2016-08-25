@@ -156,6 +156,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Modules\ModulesServiceProvider::class, // Config load modules
+        Prettus\Repository\Providers\RepositoryServiceProvider::class, // Config andersao/l5-repository
+        App\Modules\Core\Providers\RepositoryServiceProvider::class, // Config RepositoryServiceProvider
+        Barryvdh\Debugbar\ServiceProvider::class, //config debugbar
 
     ],
 
@@ -202,6 +205,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class, //debugbar facade
 
     ],
 

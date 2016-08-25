@@ -1,0 +1,31 @@
+.form-horizontal .control-label.account-info-name{
+    text-align: left;
+}
+.bootstrap-tagsinput {margin-bottom: 20px;}
+.bootstrap-tagsinput .tag.label-info {background: #5bc0de;}
+.bootstrap-tagsinput .tag.label {font-size: 90%}
+.right_col[role="accountIndex"] .column-title.sortable{position: relative; padding: 8px 16px 8px 8px; cursor: pointer;}
+.column-title .fa {display: none;}
+.right_col[role="accountIndex"] .column-title .fa{position: absolute; right: 4px;top:11px; display: inline-block;}
+.tag:after, .filter_area {display: none;}
+ul.typeahead {height: 200px; overflow-y: scroll;}
+
+.inline-breadcrumb {margin-right:20px;}
+.inline-breadcrumb a {line-height: 30px;}
+.select2-container--default .select2-selection--single .select2-selection__arrow {height: 38px !important;}
+#filters-table td {border:none; padding: 5px 0; vertical-align: middle;}
+#filters-table td span{line-height: 1}
+#filters-table td select{padding: 2px 0;}
+#filters-table td label{margin:0 0 0 10px; line-height: 20px;}
+#filters-table td input,#filters-table td select{vertical-align: middle;}
+#filters-table td .toggle-multiselect{cursor: pointer; margin-left:2px;}
+#filters-table td .input-group{margin:0;}
+
+/*OMC*/
+.gutter {background-color: #E6E9ED; background-repeat: no-repeat; background-position: 50%; position: relative;}
+.gutter.gutter-vertical {cursor: row-resize; background-image: url('../images/horizontal.png'); }
+.gutter.gutter-vertical button {position: absolute; left: 0; top: -40px;}
+.split {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; }
+.panel-top {padding-bottom: 20px;}
+.panel-bottom {}
+.service_block .well {display: inline-block; padding: 10px 0 0;}
