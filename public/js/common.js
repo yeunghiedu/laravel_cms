@@ -282,16 +282,6 @@ BillingSystem.common = {
         if(ajaxURL.tableName != undefined && ajaxURL.tableName != ''){
             tableContentId += '-' + ajaxURL.tableName;
         }
-
-        $('#act_filter').on('click',function(){
-            if($('.filter_area').is(':hidden')){
-                $('.filter_area').fadeIn('slow'); return;
-            }
-            ajaxURL.params.perPage = $(tableContentId + ' .select_per_page option:selected').val();
-            ajaxURL.params.column = $('#sel_filter').val();
-            ajaxURL.params.showFilterArea = 1;
-            loadTableByPerpage(ajaxURL.url,ajaxURL.params, tableContentId);
-        });
         $('#calllogFilter').off('click').on('click',function(e){
             e.preventDefault();
             UTIL.fire('common','checkFilterForm');
@@ -300,20 +290,11 @@ BillingSystem.common = {
             ajaxURL.params.dataFilter = $('#filter_form').serialize();
             loadTableByPerpage(ajaxURL.url,ajaxURL.params, tableContentId);
         });
-        $(".bootstrap-tagsinput").on('click',function(e){
-            var target  = $(e.target);
-            if(target.is('span')) return true;
-            $(".bootstrap-tagsinput input").trigger("keyup");
-        });
-        $(".bootstrap-tagsinput input").focus(function(){
-            $(this).val('');
-        });
 
         $(tableContentId + ' .select_per_page').on('change',function(){
             //[HTBS-524] huytt: refactor to pass more params when use ajax
             ajaxURL.params.perPage = $(tableContentId + ' .select_per_page option:selected').val();
             ajaxURL.params.page = 1;
-            ajaxURL.params.column = $('#sel_filter').val();
 
             loadTableByPerpage(ajaxURL.url,ajaxURL.params, tableContentId);
         });
@@ -332,7 +313,6 @@ BillingSystem.common = {
             //ajaxURL.params.perPage = $(this).attr('href').split('perPage=')[1];
             ajaxURL.params.perPage = $(tableContentId + ' .select_per_page option:selected').val();
             ajaxURL.params.page = $(this).attr('href').split('page=')[1];
-            ajaxURL.params.column = $('#sel_filter').val();
 
             //console.log(data);
             loadTableByPerpage(ajaxURL.url,ajaxURL.params, tableContentId);
@@ -373,14 +353,8 @@ BillingSystem.common = {
         $('#datatable-responsive_filter button').on('click',function(e){
             e.preventDefault();
             var p = $('#search_field').val();
-            if($('#sel_filter').val() == ''){
-                alert('Please select at least one field to search');
-                $('#sel_filter').tagsinput('focus');
-                return false;
-            }
             ajaxURL.params.search = p;
             ajaxURL.params.perPage = $(tableContentId + ' .select_per_page option:selected').val();
-            ajaxURL.params.column = $('#sel_filter').val();
             loadTableByPerpage(ajaxURL.url,ajaxURL.params, tableContentId);
         });
 
@@ -451,7 +425,6 @@ BillingSystem.common = {
 
                     $(tableContentId).html(data.html);
                     $(tableContentId).prepend(data.filterHTML);
-                    $('#number_column').val(data.number_column);
                     $('#search_field').val(data.search);
 
                     if(data.orderby){
@@ -476,7 +449,6 @@ BillingSystem.common = {
 
                     // reinitialize events.
                     UTIL.fire('common','iCheck');
-                    UTIL.fire('common','tagsinput');
                     UTIL.fire('common','table', ajaxURL);
                 } else {
                     alert("loadTableByPerpage has error");

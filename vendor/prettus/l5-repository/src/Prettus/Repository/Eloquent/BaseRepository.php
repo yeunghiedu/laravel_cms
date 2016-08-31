@@ -579,12 +579,12 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
 
         $temporarySkipPresenter = $this->skipPresenter;
         $this->skipPresenter(true);
+        
+        $originalModel = $this->model;
 
         $this->applyConditions($where);
-
         $deleted = $this->model->delete();
-
-        event(new RepositoryEntityDeleted($this, $this->model));
+        event(new RepositoryEntityDeleted($this, $originalModel));
 
         $this->skipPresenter($temporarySkipPresenter);
         $this->resetModel();
@@ -830,7 +830,13 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         foreach ($where as $field => $value) {
             if (is_array($value)) {
                 list($field, $condition, $val) = $value;
-                $this->model = $this->model->where($field, $condition, $val);
+                if(in_array($condition, array('In','notIn','Between','NotBetween'))){
+                    $this->model = $this->model->{'where'.$condition}($field, $val);
+                }elseif(in_array($condition, array('Null','NotNull'))){
+                    $this->model = $this->model->{'where'.$condition}($field);
+                }else{
+                    $this->model = $this->model->where($field, $condition, $val);
+                }
             } else {
                 $this->model = $this->model->where($field, '=', $value);
             }

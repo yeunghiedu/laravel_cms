@@ -39,19 +39,18 @@
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;">
+                <div class="navbar nav_title clearfix" style="border: 0;">
                     <a href="index.html" class="site_title">
                         {{--<i class="fa fa-paw"></i> --}}
                         <span>Laravel CMS</span>
                     </a>
                 </div>
 
-                <div class="clearfix"></div>
 
                 <!-- menu profile quick info -->
-                <div class="profile">
+                <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="images/user.png" alt="..." class="img-circle profile_img">
+                        <img src="{{ asset('images/user.png') }}" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
@@ -66,14 +65,12 @@
                 </div>
                 <!-- /menu profile quick info -->
 
-                <br />
-
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        {{--<h3>Billing System</h3>--}}
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-home"></i> Dashboard <span class="fa"></span></a></li>
+                            <li><a href="{{URL::route('BackEndHome.index')}}"><i class="fa fa-home"></i> Dashboard <span class="fa"></span></a></li>
+                            <li><a href="{{URL::route('BackEndAccount.index')}}"><i class="fa fa-user"></i> Account Management</a></li>
                         </ul>
                     </div>
 
@@ -110,7 +107,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="images/user.png" alt="">
+                                <img src="{{ asset('images/user.png') }}" alt="">
                                 @if(Session::get('guard') == 'sysusers')
                                     {{Auth::guard('sysusers')->user()->UserName}}
                                 @elseif(Session::get('guard') == 'accounts')
@@ -139,7 +136,7 @@
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
+                                        <span class="image"><img src="{{ asset('images/user.png') }}" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -151,7 +148,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
+                                        <span class="image"><img src="{{ asset('images/user.png') }}" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -163,7 +160,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
+                                        <span class="image"><img src="{{ asset('images/user.png') }}" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -175,7 +172,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
+                                        <span class="image"><img src="{{ asset('images/user.png') }}" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -253,6 +250,14 @@
 
 <!-- bootstrap-progressbar -->
 <script src="{{URL::asset('js/bootstrap-progressbar.min.js')}}"></script>
+<script type="text/javascript">
+    var config = {
+        AJAX_LOAD_ACCOUNT_PER_PAGE_URL: {
+            "url":"{{route('BackEndAjax.loadAccountTableByPerpage')}}",
+            "params":{}
+        },
+    }
+</script>
 <script src="{{URL::asset('js/bs-app.js')}}"></script>
 @yield('js-section')
 <!-- /gauge.js -->

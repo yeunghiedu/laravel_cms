@@ -1,0 +1,1 @@
+@extends('BillingSystem::partials.partialTableTemplate')

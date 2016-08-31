@@ -18,7 +18,8 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard(Session::get('guard'))->guest()) {
+        $guard = isset($guard) ? $guard : Session::get('guard');
+        if (Auth::guard($guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {

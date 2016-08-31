@@ -17,11 +17,14 @@ if (App::environment() == \App\Modules\Core\Constant::SUB_DOMAIN)
         Route::group(['middleware' => 'auth'],function(){
             Route::get('/',['as'=>'BackEndHome.index','uses' => 'HomeController@index']);
 
-            //charge
-            Route::get('/charge',['as'=>'BackEndCharge.index','uses' => 'ChargeController@index']);
-            Route::get('/chargeCreate',['as'=>'BackEndCharge.create','uses' => 'ChargeController@create']);
-            Route::post('/chargeStore',['as'=>'BackEndCharge.store','uses' => 'ChargeController@store']);
-            Route::get('/loadChargelogTableByPerpage',['as'=>'BackEndAjax.loadChargelogTableByPerpage','uses' => 'AjaxController@loadChargelogTableByPerpage']);
+            //account
+            Route::get('/account',['as'=>'BackEndAccount.index','uses' => 'AccountsController@index']);
+            Route::get('/accountCreate',['as'=>'BackEndAccount.create','uses' => 'AccountsController@create']);
+            Route::post('/accountStore',['as'=>'BackEndAccount.store','uses' => 'AccountsController@store']);
+            Route::get('/accountInfo',['as'=>'BackEndAccount.info','uses' => 'AccountsController@info']);
+            Route::post('/accountUpdate/{id}',['as'=>'BackEndAccount.update','uses' => 'AccountsController@update']);
+            Route::post('/accountDelete',['as'=>'BackEndAccount.destroy','uses' => 'AccountsController@destroy']);
+            Route::get('/loadAccountTableByPerpage',['as'=>'BackEndAjax.loadAccountTableByPerpage','uses' => 'AjaxController@loadAccountTableByPerpage']);
         });
 
         Route::get('/login',['as'=>'BackEndAuth.getLogin','uses' => 'AuthController@getLogin']);

@@ -40,8 +40,7 @@ class AuthController extends Controller
 
     protected $messageErrors;
 
-    //[HTBS-750] huytt: define tables will be used to login
-    protected $guards = ['sysusers'];
+    protected $guards = ['sysusers','accounts'];
 
     protected $guard = null;
 
@@ -103,7 +102,6 @@ class AuthController extends Controller
         }
     }
 
-    // [HTBS-750] huytt: use guard from session to logout and create Credentials with name of table
     /**
      * Log the user out of the application.
      *
@@ -132,8 +130,6 @@ class AuthController extends Controller
         Arr::set($results, 'password', $formInput['password'] );
 
         return $results;
-
-//        return $request->only($this->loginUsername(), 'password');
     }
 
     public function loginUsername()
